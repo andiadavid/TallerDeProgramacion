@@ -60,7 +60,7 @@ nombre y edad. La lectura finaliza con el numero de socio 0 y el arbol debe qued
            a^.HI:= nil; 
            a^.HD:= nil;
          end
-    else if (elem.numero < a^.dato.numero) then 
+    else if (elem.numero <= a^.dato.numero) then //Los repetidos se cargan a la izquierda.
               InsertarElemento(a^.HI, elem)
          else 
               InsertarElemento(a^.HD, elem); 
@@ -284,14 +284,36 @@ procedure InformarCantidadSociosEnRango (a:arbol; num1:integer; num2:Integer; va
 begin
  if (a <> nil)then begin
      if(num1<=a^.dato.numero)then
-        if(num2>=a^.dato.numero)then   
-            cant:=cant + 1;
-            //cant:=cant + 1;
-            InformarPromedioDeEdad (a^.HI,);
-      InformarPromedioDeEdad (a^.HD,);
-      end;
+         if(a^.dato.numero<=num2)then begin  
+              cant:=cant + 1;
+              InformarCantidadSociosEnRango(a^.HI,num1,num2,cant);
+              InformarCantidadSociosEnRango(a^.HD,num1,num2,cant);
+         end
+         else InformarCantidadSociosEnRango(a^.HI,num1,num2,cant)
+     else InformarCantidadSociosEnRango(a^.HD,num1,num2,cant);
+  end;
 end;
-  
+//10-------------------------------------------ç
+procedure InformarNumerosSociosOrdenCreciente(a:arbol);
+begin
+  if(a<>Nil)then begin
+      InformarNumerosSociosOrdenCreciente (a^.HI);
+      Write('num de socio: ',a^.dato.numero);
+      InformarNumerosSociosOrdenCreciente (a^.HD);
+  end;
+end;
+//11----------------------------------------------
+
+procedure InformarNumerosSociosOrdenDeCreciente (a:arbol);
+begin
+  if(a<>Nil)then begin
+      InformarNumerosSociosOrdenDeCreciente (a^.HI);
+      InformarNumerosSociosOrdenDeCreciente (a^.HD);
+      if(a^.dato.numero mod 2)=0 then
+          Write('num de socio: ',a^.dato.numero);
+  end;
+end;
+
 var a: arbol; 
     cant:Integer;
     prom:Integer;
@@ -320,7 +342,10 @@ Begin
   write('num de socio sup'); read(num2);
   cant:=0;
   InformarCantidadSociosEnRango (a,num1,num2,cant);
-  {  InformarNumerosSociosOrdenCreciente (a);
-    InformarNumerosSociosOrdenDeCreciente (a);
-  }   
+  WriteLn('cant de socios que cumplen: ',cant);
+  //10
+  InformarNumerosSociosOrdenCreciente (a);
+  //11
+  InformarNumerosSociosOrdenDeCreciente (a);
+     
 End.
