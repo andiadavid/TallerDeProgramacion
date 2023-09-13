@@ -1,4 +1,4 @@
-Program clase2MIsm;
+Program p2.ej1;
 {1.- Implementar un programa que invoque a los siguientes m�dulos.
 a. Un m�dulo recursivo que permita leer una secuencia de caracteres terminada en punto, los almacene en un vector con dimensi�n f�sica igual a 10 y 
 retorne el vector.

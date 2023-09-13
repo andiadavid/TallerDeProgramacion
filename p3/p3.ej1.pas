@@ -53,13 +53,12 @@ nombre y edad. La lectura finaliza con el numero de socio 0 y el arbol debe qued
   
   Procedure InsertarElemento (var a: arbol; elem: socio);
   Begin
-    if (a = nil) 
-    then begin
-           new(a);
-           a^.dato:= elem; 
-           a^.HI:= nil; 
-           a^.HD:= nil;
-         end
+    if (a = nil) then begin
+        new(a);
+        a^.dato:= elem; 
+        a^.HI:= nil; 
+        a^.HD:= nil;
+    end
     else if (elem.numero <= a^.dato.numero) then //Los repetidos se cargan a la izquierda.
               InsertarElemento(a^.HI, elem)
          else 
@@ -68,9 +67,7 @@ nombre y edad. La lectura finaliza con el numero de socio 0 y el arbol debe qued
 
 var unSocio: socio;  
 Begin
- writeln;
  writeln ('----- Ingreso de socios y armado del arbol ----->');
- writeln;
  a:= nil;
  LeerSocio (unSocio);
  while (unSocio.numero <> 0)do
@@ -81,7 +78,6 @@ Begin
   end;
  writeln;
  writeln ('-----------------------------------------------');
- writeln;
 end;
 
 procedure InformarNumeroSocioMasGrande (a: arbol);
@@ -99,20 +95,14 @@ procedure InformarNumeroSocioMasGrande (a: arbol);
    
 var max: integer;
 begin
-  writeln;
   writeln ('----- Informar Numero Socio Mas Grande ----->');
-  writeln;
   max:= NumeroMasGrande (a);
   if (max = -1) then 
       writeln ('Arbol sin elementos')
   else begin
-         writeln;
          writeln ('Numero de socio mas grande: ', max);
-         writeln;
        end;
-  writeln;
   writeln ('-----------------------------------------------');
-  writeln;
 end;
 
 procedure InformarDatosSocioNumeroMasChico (a: arbol);
@@ -128,20 +118,14 @@ procedure InformarDatosSocioNumeroMasChico (a: arbol);
    
 var minSocio: arbol;
 begin
-  writeln;
   writeln ('----- Informar Datos Socio Numero Mas Chico ----->');
-  writeln;
   minSocio:= SocioMasChico (a);
   if (minSocio = nil) then 
       writeln ('Arbol sin elementos')
   else begin
-         writeln;
          writeln ('Socio con numero mas chico: ', minSocio^.dato.numero, ' Nombre: ', minSocio^.dato.nombre, ' Edad: ', minSocio^.dato.edad); 
-         writeln;
        end;
-  writeln;
   writeln ('-----------------------------------------------');
-  writeln;
 end;
 
 procedure InformarNumeroSocioConMasEdad (a: arbol);
@@ -168,21 +152,15 @@ procedure InformarNumeroSocioConMasEdad (a: arbol);
 	end;
 var maxEdad, maxNum: integer;
 begin
-  writeln;
   writeln ('----- Informar Numero Socio Con Mas Edad ----->');
-  writeln;
   maxEdad := -1;
   NumeroMasEdad (a, maxEdad, maxNum);
   if (maxEdad = -1)  then 
       writeln ('Arbol sin elementos')
   else begin
-         writeln;
          writeln ('Numero de socio con mas edad: ', maxNum);
-         writeln;
        end;
-  writeln;
   writeln ('-----------------------------------------------');
-  writeln;
 end;
 
 procedure AumentarEdad (a: arbol);
@@ -213,9 +191,7 @@ procedure InformarExistenciaNumeroSocio (a: arbol);
   
 var numABuscar: integer;
 begin
-  writeln;
   writeln ('----- Informar Existencia Numero Socio ----->');
-  writeln;
   write ('Ingrese numero de socio a buscar: ');
   Readln (numABuscar);
   writeln;
@@ -223,9 +199,7 @@ begin
       writeln ('El numero ', numABuscar, ' existe')
   else 
       writeln ('El numero ', numABuscar, ' no existe');
-  writeln;
   writeln ('-----------------------------------------------');
-  writeln;
 end;
 
 //6--------------------------------------------
@@ -244,20 +218,16 @@ procedure InformarExistenciaNombreSocio (a: arbol);
   
 var nomABuscar: String;
 begin
-  writeln;
   writeln ('----- Informar Existencia Numero Socio ----->');
-  writeln;
   write ('Ingrese nombre de socio a buscar: ');
   Readln (nomABuscar);
-  writeln;
   if (Buscar (a, nomABuscar)) then 
       writeln ('El nombre ', nomABuscar, ' existe')
   else 
       writeln ('El nombre ', nomABuscar, ' no existe');
-  writeln;
   writeln ('-----------------------------------------------');
-  writeln;
 end;
+
 //7----------------------------------
 procedure InformarCantidadSocios (a: arbol; var cant:Integer);
 begin
@@ -298,7 +268,7 @@ procedure InformarNumerosSociosOrdenCreciente(a:arbol);
 begin
   if(a<>Nil)then begin
       InformarNumerosSociosOrdenCreciente (a^.HI);
-      Write('num de socio: ',a^.dato.numero);
+      Write('numSocio: ',a^.dato.numero,', ');
       InformarNumerosSociosOrdenCreciente (a^.HD);
   end;
 end;
@@ -310,7 +280,7 @@ begin
       InformarNumerosSociosOrdenDeCreciente (a^.HI);
       InformarNumerosSociosOrdenDeCreciente (a^.HD);
       if(a^.dato.numero mod 2)=0 then
-          Write('num de socio: ',a^.dato.numero);
+          Write('numSocio: ',a^.dato.numero,', ');
   end;
 end;
 
@@ -325,6 +295,7 @@ Begin
   InformarDatosSocioNumeroMasChico (a);
   InformarNumeroSocioConMasEdad (a);
   AumentarEdad (a);
+  writeln('se aumeto la edad (+1) de los socios');
   InformarExistenciaNumeroSocio (a);
   //-------desarrollo
   //6
@@ -332,20 +303,28 @@ Begin
   //7
   cant:=0;
   InformarCantidadSocios (a,cant);
-  WriteLn('la cant de socios: ',cant);
+  WriteLn('la cant de socios totales: ',cant);
+  writeln ('-----------------------------------------------');
   //8
   prom:=0; //cant:=0;
   InformarPromedioDeEdad (a,prom{,cant});
-  WriteLn('edad prom: ',prom/cant:2);
+  WriteLn('edad prom de todos los socios: ',prom/cant:2);
+  writeln ('-----------------------------------------------');
   //9
+  writeln ('-ingrese un num de socio inf y superior para buscar los socios q cumplen con el rango.-');
   write('num de socio inf'); read(num1);
   write('num de socio sup'); read(num2);
   cant:=0;
   InformarCantidadSociosEnRango (a,num1,num2,cant);
   WriteLn('cant de socios que cumplen: ',cant);
+  writeln ('-----------------------------------------------');
   //10
+  WriteLn('numero de socios en orden creciente: ');
   InformarNumerosSociosOrdenCreciente (a);
+  writeln ();
+  writeln ('-----------------------------------------------');
   //11
+  WriteLn('numero de socios pares en orden decreciente: ');
   InformarNumerosSociosOrdenDeCreciente (a);
      
 End.
