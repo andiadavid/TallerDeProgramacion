@@ -106,13 +106,14 @@ end;
 //B buscar los pedidos del cliente con cod recibido como parametro----
 function moduloB(a:arbol; cod:Integer):lista;
 begin
-  if(a<>Nil)then begin
-    if(a^.numC= cod)then
-      moduloB:=a^.listaP;
-    if(a^.numC> cod)then moduloB:=moduloB(a^.HI,cod);
-    if(a^.numC< cod)then moduloB:=moduloB(a^.HD,cod);
-  end
-  else moduloB:=nil;
+  if(a= nil) then 
+      moduloB:= nil
+  else if(a^.numC= cod)then
+         moduloB:=a^.listaP
+       else if(a^.numC> cod)then 
+              moduloB:=moduloB(a^.HI,cod)
+          else 
+              moduloB:=moduloB(a^.HD,cod);
 end;
 //C suma monto total de la lista
 function moduloC(l:lista):real;
@@ -146,7 +147,7 @@ begin
   WriteLn('-------------arbol y listas: ');
   imprimirA(a);
   WriteLn('-------------buscar los pedidos q realizo un cliente :');
-  write('cod de cliente a buscar');read(cod);
+  write('cod de cliente a buscar ');read(cod);
   listaPedidos:=moduloB(a,cod);
   imprimirL(listaPedidos);
   WriteLn('-------------retornar montoTotal abonado por el cliente: ');

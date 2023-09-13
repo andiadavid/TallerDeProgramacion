@@ -108,27 +108,38 @@ procedure incisoB(a:arbol);
         end;
         maximo:=imax;      
     end;
-  function buscarMes(a: arbol; cod:Integer): integer;
-  begin
-    if (a = nil) then 
-      buscarMes:= -1
-    else if (a^.dato.codigo= cod) then 
-            buscarMes:= maximo(a^.dato.total)
-         else if(cod<a^.dato.codigo)then
-                buscarMes:= buscarMes(a^.HI,cod)
-            else 
-                buscarMes:= buscarMes(a^.HD,cod);
-  end;
-   
-var max:integer;
+    {function buscarMes(a: arbol; cod:Integer): integer;
+    begin
+        if (a = nil) then 
+        buscarMes:= -1
+        else if (a^.dato.codigo= cod) then 
+                buscarMes:= maximo(a^.dato.total)
+            else if(cod<a^.dato.codigo)then
+                    buscarMes:= buscarMes(a^.HI,cod)
+                else 
+                    buscarMes:= buscarMes(a^.HD,cod);
+    end;
+    }
+    function buscarMes(a: arbol; cod:Integer):arbol;
+    begin
+        if (a = nil) then 
+            buscarMes:= Nil
+        else if (a^.dato.codigo= cod) then 
+                buscarMes:= a
+            else if(cod<a^.dato.codigo)then
+                    buscarMes:= buscarMes(a^.HI,cod)
+                else 
+                    buscarMes:= buscarMes(a^.HD,cod);
+    end;
+var punt:arbol;
     cod:integer;
 begin
     write('codCliente: ');read(cod);
-    max:=buscarMes(a,cod);
-    if (max = -1) then 
+    punt:=buscarMes(a,cod);
+    if (punt = Nil) then 
         writeln ('no existe el cliente: ',cod)
     else begin
-            writeln ('el mes q mas gasto el cliente ',cod,', fue: ',max);
+            writeln ('el mes q mas gasto el cliente ',cod,', fue: ',maximo(punt^.dato.total));
         end;
 end;
 //inciso C. busqueda cant de clientes------------------
