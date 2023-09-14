@@ -62,7 +62,7 @@ procedure cargarArbol (var a:arbol);
             else begin
                 if(r.codigo < ar^.dato.codigo)then
                     insertarElemento(ar^.HI, r)
-                else if(r.codigo > ar^.dato.codigo)then
+                else 
                     insertarElemento(ar^.HD, r);
             end;    
         end

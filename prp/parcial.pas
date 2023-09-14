@@ -116,6 +116,7 @@ begin
               moduloB:=moduloB(a^.HD,cod);
 end;
 //C suma monto total de la lista
+{
 function moduloC(l:lista):real;
 begin
   if(l<>Nil)then begin
@@ -123,17 +124,15 @@ begin
   end
   else moduloC:=0;
 end;
-{
+}
 procedure moduloC(l:lista;var aux:real);
 begin
   if(l<>nil)then begin   
-    Write('monto',l^.dato.monto:2:2);
     aux:=aux+ l^.dato.monto;
-    l:=l^.sig;
-    moduloC(l,aux);
+    moduloC(l^.sig,aux);
   end;
 end;
-}
+
 
 //PP-------------------------------------------------
 
@@ -152,7 +151,7 @@ begin
   imprimirL(listaPedidos);
   WriteLn('-------------retornar montoTotal abonado por el cliente: ');
   monT:=0;
-  //moduloC(listaPedidos,monT);
-  monT:=moduloC(listaPedidos);
+  moduloC(listaPedidos,monT);
+  //monT:=moduloC(listaPedidos);
   WriteLn('monto total: ',monT:2:2); 
 end.

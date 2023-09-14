@@ -250,17 +250,17 @@ begin
       end;
 end;
 //9-------------------------------------------
-procedure InformarCantidadSociosEnRango (a:arbol; num1:integer; num2:Integer; var cant:Integer);
+procedure InformarCantidadSociosEnRango (a:arbol; inf:integer; sup:Integer; var cant:Integer);
 begin
  if (a <> nil)then begin
-     if(num1<=a^.dato.numero)then
-         if(a^.dato.numero<=num2)then begin  
+     if(inf<=a^.dato.numero)then
+         if(a^.dato.numero<=sup)then begin  
               cant:=cant + 1;
-              InformarCantidadSociosEnRango(a^.HI,num1,num2,cant);
-              InformarCantidadSociosEnRango(a^.HD,num1,num2,cant);
+              InformarCantidadSociosEnRango(a^.HI,inf,sup,cant);
+              InformarCantidadSociosEnRango(a^.HD,inf,sup,cant);
          end
-         else InformarCantidadSociosEnRango(a^.HI,num1,num2,cant)
-     else InformarCantidadSociosEnRango(a^.HD,num1,num2,cant);
+         else InformarCantidadSociosEnRango(a^.HI,inf,sup,cant)
+     else InformarCantidadSociosEnRango(a^.HD,inf,sup,cant);
   end;
 end;
 //10-------------------------------------------ç
