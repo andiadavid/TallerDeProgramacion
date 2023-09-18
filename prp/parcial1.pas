@@ -1,4 +1,4 @@
-program parcial;
+program parcial1;
 type
   pedido=record //pedidos
     numC:integer;
